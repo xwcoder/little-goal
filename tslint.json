@@ -1,0 +1,10 @@
+{
+  "extends": ["tslint-config-ilemon/react", "tslint-sonarts"],
+  "rules": {
+    "no-invalid-await": {
+      "severity": "warning"
+    },
+    "object-literal-key-quotes": [true, "as-needed"],
+    "jsx-no-multiline-js": false
+  }
+}

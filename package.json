@@ -1,0 +1,66 @@
+{
+  "name": "little-goal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./app.js",
+  "scripts": {
+    "prebuild": "rm -rf ./lib",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js",
+    "lint": "tslint --project tsconfig.json",
+    "test": "jest --verbose"
+  },
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
+  "author": {
+    "name": "creep",
+    "email": "creep.wei@gmail.com"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.18",
+    "@types/react": "^16.7.18",
+    "@types/react-dom": "^16.0.11",
+    "@types/react-redux": "^6.0.12",
+    "@types/react-router-dom": "^4.3.1",
+    "babel-loader": "^8.0.4",
+    "babel-plugin-component-import": "^0.1.2",
+    "cross-env": "^5.2.0",
+    "jest": "^23.6.0",
+    "pre-commit": "^1.2.2",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.0",
+    "tslint-config-ilemon": "^0.1.5",
+    "tslint-react": "^3.6.0",
+    "tslint-sonarts": "^1.8.0",
+    "typescript": "^3.2.2",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^3.2.0",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-merge": "^4.1.5"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.8.1",
+    "@material-ui/icons": "^3.0.2",
+    "@material-ui/styles": "^3.0.0-alpha.6",
+    "@rematch/core": "^1.0.6",
+    "coladb": "^1.0.4",
+    "react": "^16.7.0-alpha.2",
+    "react-dom": "^16.7.0-alpha.2",
+    "react-hot-loader": "^4.6.3",
+    "react-redux": "^6.0.0",
+    "react-router-dom": "^4.3.1"
+  }
+}
