@@ -28,7 +28,7 @@ function GoalList ({ goalList }) {
 
   const items = goalList.map((goal) => (
     <ListItem key={goal.id} className={classes.listItem}>
-      <Link to={`/goal/d/${goal.id}`}>
+      <Link to={`/goal/${goal.id}`}>
         <ListItemText>
           {goal.title}
         </ListItemText>

@@ -1,13 +1,20 @@
 import * as React from 'react'
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { makeStyles } from '@material-ui/styles'
 import {
   TextField,
-  Button
+  Button,
+  IconButton,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  DialogContentText
 } from '@material-ui/core'
+import { Delete as DeleteIcon } from '@material-ui/icons'
 
 import ContentContainer from '../ContentContainer'
 import AppHeader from '../AppHeader'
@@ -21,10 +28,16 @@ const useStyles = makeStyles((theme) => ({
     display: 'block',
     textDecoration: 'none',
     color: 'inhiret'
+  },
+  allActionLink: {
+    display: 'inline-block',
+    marginTop: theme.spacing.unit,
+    textDecoration: 'none',
+    color: 'inhiret'
   }
 }))
 
-function Goal ({ goalList, unitList, match }) {
+function Goal ({ goalList, unitList, history, match, del }) {
 
   const id = parseInt(match.params.id, 10)
   const goal = goalList.find((item) => item.id === id)
@@ -42,12 +55,30 @@ function Goal ({ goalList, unitList, match }) {
   const {
     title,
     amount,
+    completeAmount = 0,
     startTime,
     endTime
   } = goal
 
   const inputProps = {
     disabled: true
+  }
+
+  const completeView = `${completeAmount} (${(completeAmount / amount * 100).toFixed(2) }%)`
+
+  const [open, setOpen] = useState(false)
+
+  function handleOpen () {
+    setOpen(true)
+  }
+
+  function handleClose () {
+    setOpen(false)
+  }
+
+  async function handleDelete () {
+    await del(id)
+    history.goBack()
   }
 
   return (
@@ -57,6 +88,9 @@ function Goal ({ goalList, unitList, match }) {
         backButton={true}
       >
         <EditoGoalButton id={id} />
+        <IconButton color="inherit">
+          <DeleteIcon onClick={handleOpen} />
+        </IconButton>
       </AppHeader>
       <ContentContainer>
         <TextField
@@ -74,7 +108,14 @@ function Goal ({ goalList, unitList, match }) {
           inputProps={inputProps}
         />
         <TextField
-          label="目标"
+          label="已完成"
+          value={completeView}
+          fullWidth={true}
+          margin="normal"
+          inputProps={inputProps}
+        />
+        <TextField
+          label="计量单位"
           value={unit.text}
           margin="normal"
           inputProps={inputProps}
@@ -110,7 +151,41 @@ function Goal ({ goalList, unitList, match }) {
             向前一小步
           </Button>
         </Link>
+        <Link
+          to={`/action/list/${id}`}
+          className={classes.allActionLink}
+        >
+          <Button
+            color="primary"
+          >
+            全部完成项
+          </Button>
+        </Link>
       </ContentContainer>
+      <Dialog
+        open={open}
+      >
+        <DialogTitle>放弃「{goal.title}」?</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            最可怕的敌人，就是没有坚强的信念。——罗曼·罗兰
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            color="primary"
+            onClick={handleClose}
+          >
+            再坚持一下
+          </Button>
+          <Button
+            color="primary"
+            onClick={handleDelete}
+          >
+            删了吧
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Fragment>
   )
 }
@@ -120,6 +195,12 @@ export default connect(
   (state: any) => ({
     goalList: state.goal,
     unitList: state.unit
+  }),
+
+  (dispatch: any) => ({
+    del (id) {
+      return dispatch.goal.del(id)
+    }
   })
 
 )(Goal)

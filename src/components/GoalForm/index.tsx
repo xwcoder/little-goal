@@ -72,7 +72,8 @@ function GoalForm (props) {
 
     const goalData = {
       ...goal,
-      ...state
+      ...state,
+      amount: parseInt(state.amount, 10)
     }
 
     if (isEdit) {
@@ -162,11 +163,11 @@ export default connect(
   },
 
   (dispatch: any) => ({
-    async create (goal) {
-      await dispatch.goal.create(goal)
+    create (goal) {
+      return dispatch.goal.create(goal)
     },
-    async update (goal) {
-      await dispatch.goal.update(goal)
+    update (goal) {
+      return dispatch.goal.update(goal)
     }
   })
 

@@ -5,6 +5,7 @@
       "severity": "warning"
     },
     "object-literal-key-quotes": [true, "as-needed"],
-    "jsx-no-multiline-js": false
+    "jsx-no-multiline-js": false,
+    "no-commented-code": false
   }
 }

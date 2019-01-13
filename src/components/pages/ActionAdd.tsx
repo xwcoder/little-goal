@@ -1,14 +1,17 @@
 import * as React from 'react'
 import { Fragment } from 'react'
-import { connect } from 'react-redux'
 
 import AppHeader from '../AppHeader'
 import ContentContainer from '../ContentContainer'
 import ActionForm from '../ActionForm'
 
-function AddAction ({ match }) {
+export default function AddAction ({ history, match }) {
 
   const id = parseInt(match.params.id, 10)
+
+  function onSuccess () {
+    history.goBack()
+  }
 
   return (
     <Fragment>
@@ -17,15 +20,8 @@ function AddAction ({ match }) {
         backButton={true}
       />
       <ContentContainer>
-        <ActionForm id={id} />
+        <ActionForm onSuccess={onSuccess} goalId={id} />
       </ContentContainer>
     </Fragment>
   )
 }
-
-export default connect(
-  null,
-  (dispatch) => ({
-
-  })
-)(AddAction)

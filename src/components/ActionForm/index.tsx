@@ -2,16 +2,11 @@ import * as React from 'react'
 import { useState } from 'react'
 import { connect } from 'react-redux'
 import {
-  FormControl,
-  InputLabel,
   TextField,
-  Select,
-  MenuItem,
   Button
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
-import { UNIT_LIST } from '../../constants'
 import { formatTime, noop } from '../../util'
 
 const useStyles = makeStyles((theme) => ({
@@ -30,14 +25,13 @@ function ActionForm (props) {
   const classes = useStyles()
 
   const {
-    id,
+    goalId,
     goalList,
     onSuccess = noop,
-    create,
-    update
+    create
   } = props
 
-  const goal = goalList.find((item) => item.id === id)
+  const goal = goalList.find((item) => item.id === goalId)
 
   if (!goal) {
     return null
@@ -58,9 +52,14 @@ function ActionForm (props) {
   const handleSubmit = async (event) => {
 
     event.preventDefault()
+    const action = {
+      goalId: goal.id,
+      ...state,
+      amount: parseInt(state.amount, 10)
+    }
 
-    console.log('action state-->', state)
-    // onSuccess()
+    await create(action)
+    onSuccess()
   }
 
   return (
@@ -69,7 +68,6 @@ function ActionForm (props) {
         label="目标"
         value={goal.title}
         fullWidth={true}
-        autoFocus={true}
         margin="normal"
         inputProps={{
           disabled: true
@@ -83,6 +81,7 @@ function ActionForm (props) {
         required={true}
         margin="normal"
         type="number"
+        autoFocus={true}
         onChange={handleChange('amount')}
       />
       <div>
@@ -115,11 +114,8 @@ export default connect(
   }),
 
   (dispatch: any) => ({
-    async create (goal) {
-      await dispatch.goal.create(goal)
-    },
-    async update (goal) {
-      await dispatch.goal.update(goal)
+    create (data) {
+      return dispatch.action.create(data)
     }
   })
 

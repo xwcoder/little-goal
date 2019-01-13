@@ -24,7 +24,7 @@ export async function del (id) {
 
   goalStore.delete(id)
 
-  let cursor: any = await actionIndex.openKeyCursor(id)
+  let cursor: any = await actionIndex.openCursor(id)
 
   while (cursor) {
     await cursor.delete()

@@ -2,16 +2,21 @@ import './boots'
 import * as React from 'react'
 import { hot } from 'react-hot-loader/root'
 import { Provider } from 'react-redux'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch
+} from 'react-router-dom'
 import { CssBaseline } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
 
 import Home from './pages/Home'
-import AddGoal from './pages/AddGoal'
+import GoalAdd from './pages/GoalAdd'
 import Goal from './pages/Goal'
-import EditGoal from './pages/EditGoal'
-import AddAction from './pages/AddAction'
+import GoalEdit from './pages/GoalEdit'
+import ActionAdd from './pages/ActionAdd'
+import ActionListPage from './pages/ActionList'
 
 const theme = createMuiTheme({
 
@@ -27,11 +32,14 @@ function App ({ store }) {
       <Provider store={store}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <Route path="/" exact={true} component={Home} />
-          <Route path="/goal/add" exact={true} component={AddGoal} />
-          <Route path="/goal/d/:id" component={Goal} />
-          <Route path="/goal/edit/:id" component={EditGoal} />
-          <Route path="/action/add/:id" component={AddAction} />
+          <Switch>
+            <Route path="/" exact={true} component={Home} />
+            <Route path="/goal/add" component={GoalAdd} />
+            <Route path="/goal/:id" component={Goal} />
+            <Route path="/goal/edit/:id" component={GoalEdit} />
+            <Route path="/action/add/:id" component={ActionAdd} />
+            <Route path="/action/list/:id" component={ActionListPage} />
+          </Switch>
         </ThemeProvider>
       </Provider>
     </Router>

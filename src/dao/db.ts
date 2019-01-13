@@ -12,8 +12,6 @@ export async function initDB () {
 
   let oldVersion = -1
 
-  // await coladb.deleteDatabase(dbname) // TODO to be remoted
-
   db = await coladb.open(dbname, version, (idb, oldV, newV) => {
 
     oldVersion = oldV
@@ -25,6 +23,7 @@ export async function initDB () {
     const actionStore = idb.createObjectStore('action', { autoIncrement: true, keyPath: 'id' })
     actionStore.createIndex('goalId', 'goalId')
     actionStore.createIndex('time', 'time')
+    actionStore.createIndex('goalId-time', ['goalId', 'time'])
 
     idb.createObjectStore('unit', { autoIncrement: true, keyPath: 'id' })
   })

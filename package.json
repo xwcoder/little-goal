@@ -57,8 +57,8 @@
     "@material-ui/styles": "^3.0.0-alpha.6",
     "@rematch/core": "^1.0.6",
     "coladb": "^1.0.4",
-    "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2",
+    "react": "^16.8.0-alpha.0",
+    "react-dom": "^16.8.0-alpha.0",
     "react-hot-loader": "^4.6.3",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1"

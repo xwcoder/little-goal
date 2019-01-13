@@ -40,7 +40,6 @@ export const goal = {
     },
 
     unshift (state, payload) {
-
       return [payload, ...state]
     }
   },
@@ -54,7 +53,7 @@ export const goal = {
     },
 
     async update (data) {
-      const id = await goalDao.update(data)
+      await goalDao.update(data)
       dispatch.goal.replace(data)
     },
 
