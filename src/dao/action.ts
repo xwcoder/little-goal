@@ -1,5 +1,11 @@
 import { open } from './db'
 
+export async function get (id) {
+  const db = await open()
+  const store = db.transaction('action', 'readonly').objectStore('action')
+  return store.get(id)
+}
+
 export async function getAll () {
 
   const db = await open()
@@ -18,14 +24,49 @@ export async function getAllByGoalId (goalId) {
   return index.getAll(goalId)
 }
 
-// 获取指定goalId下最近n天的活动，最多取count项
-// TODO
-export async function getRecentItems (goalId, n = 7, count = 10) {
+export async function query ({
+  goalId,
+  start = 0,
+  limit = Infinity,
+  fromTime = new Date('1970-01-10').getTime(),
+  endTime = new Date().getTime(),
+  direction = 'prev'
+}) {
+
+  let amount = 1
+  const list = []
+
+  const db = await open()
+  const index = db.transaction('action', 'readonly').objectStore('action').index('goalId-time')
+  let cursor: any = await index.openCursor(IDBKeyRange.bound([goalId, fromTime], [goalId, endTime]), direction)
+
+  if (cursor) {
+
+    if (start > 0) {
+      await cursor.advance(start)
+    }
+
+    while (cursor && amount <= limit) {
+      amount = amount + 1
+      list.push(cursor.value)
+      cursor = await cursor.continue()
+    }
+  }
+
+  return list
+}
+
+export async function count (goalId?) {
   const db = await open()
   const store = db.transaction('action', 'readonly').objectStore('action')
-  const index = store.index('goalId-time')
 
-  const list = []
+  if (typeof goalId === 'undefined') {
+    return store.count()
+  }
+
+  const index = store.index('goalId')
+  const list: any = await index.getAllKeys(IDBKeyRange.only(goalId))
+  return list ? list.length : 0
 }
 
 export async function add (action) {

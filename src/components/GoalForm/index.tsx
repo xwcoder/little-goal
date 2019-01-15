@@ -55,8 +55,8 @@ function GoalForm (props) {
     title: goal.title || '',
     amount: goal.amount || '',
     unitId: goal.unitId || unitList[0].id,
-    startTime: goal.startTime || formatTime(new Date(), 'yyyy-MM-dd'),
-    endTime: goal.endTime || `${new Date().getFullYear()}-12-31`
+    startTime: formatTime(goal.startTime || new Date(), 'yyyy-MM-dd'),
+    endTime: goal.endTime ? formatTime(goal.endTime, 'yyyy-MM-dd') : `${new Date().getFullYear()}-12-31`
   })
 
   const handleChange = (name) => (event) => {
@@ -73,7 +73,9 @@ function GoalForm (props) {
     const goalData = {
       ...goal,
       ...state,
-      amount: parseInt(state.amount, 10)
+      amount: parseInt(state.amount, 10),
+      startTime: new Date(state.startTime).getTime(),
+      endTime: new Date(state.endTime).getTime()
     }
 
     if (isEdit) {

@@ -55,7 +55,8 @@ function ActionForm (props) {
     const action = {
       goalId: goal.id,
       ...state,
-      amount: parseInt(state.amount, 10)
+      amount: parseInt(state.amount, 10),
+      time: new Date(state.time).getTime()
     }
 
     await create(action)

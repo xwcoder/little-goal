@@ -20,6 +20,8 @@ import ContentContainer from '../ContentContainer'
 import AppHeader from '../AppHeader'
 import EditoGoalButton from '../EditGoalButton'
 
+import { formatTime } from './../../util'
+
 const useStyles = makeStyles((theme) => ({
   actionButton: {
     marginTop: theme.spacing.unit * 4
@@ -65,6 +67,8 @@ function Goal ({ goalList, unitList, history, match, del }) {
   }
 
   const completeView = `${completeAmount} (${(completeAmount / amount * 100).toFixed(2) }%)`
+  const startTimeView = formatTime(startTime, 'yyyy-MM-dd')
+  const endTimeView = formatTime(endTime, 'yyyy-MM-dd')
 
   const [open, setOpen] = useState(false)
 
@@ -124,7 +128,7 @@ function Goal ({ goalList, unitList, history, match, del }) {
           <TextField
             label="开始日期"
             type="date"
-            value={startTime}
+            value={startTimeView}
             margin="normal"
             inputProps={inputProps}
           />
@@ -133,7 +137,7 @@ function Goal ({ goalList, unitList, history, match, del }) {
           <TextField
             label="结束日期"
             type="date"
-            value={endTime}
+            value={endTimeView}
             margin="normal"
             inputProps={inputProps}
           />
@@ -151,16 +155,19 @@ function Goal ({ goalList, unitList, history, match, del }) {
             向前一小步
           </Button>
         </Link>
-        <Link
-          to={`/action/list/${id}`}
-          className={classes.allActionLink}
-        >
-          <Button
-            color="primary"
+        {
+          completeAmount > 0 &&
+          <Link
+            to={`/action/list/${id}`}
+            className={classes.allActionLink}
           >
-            全部完成项
-          </Button>
-        </Link>
+            <Button
+              color="primary"
+            >
+              全部完成项
+            </Button>
+          </Link>
+        }
       </ContentContainer>
       <Dialog
         open={open}

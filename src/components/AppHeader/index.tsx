@@ -43,7 +43,9 @@ export default function AppHeader (props) {
   ) : null
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="sticky"
+    >
       <Toolbar>
         {BackButton}
         <Typography className={classes.grow} variant="h6" color="inherit">{title}</Typography>

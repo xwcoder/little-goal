@@ -25,8 +25,20 @@ export const action = {
       return dispatch.goal.update(goalData)
     },
 
-    async del (payload) {
-      console.log(payload) // TODO
+    async del (id, state) {
+
+      const actionItem: any = await actionDao.get(id)
+      const { amount, goalId } = actionItem
+
+      const { goal: goalList } = state
+      const goal = goalList.find((item) => item.id === goalId)
+      const goalData = {...goal}
+      goalData.completeAmount = (goalData.completeAmount || 0) - amount
+
+      return Promise.all([
+        actionDao.del(id),
+        dispatch.goal.update(goalData)
+      ])
     }
   })
 }

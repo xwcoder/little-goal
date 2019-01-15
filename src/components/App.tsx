@@ -16,7 +16,7 @@ import GoalAdd from './pages/GoalAdd'
 import Goal from './pages/Goal'
 import GoalEdit from './pages/GoalEdit'
 import ActionAdd from './pages/ActionAdd'
-import ActionListPage from './pages/ActionList'
+import Action from './pages/Action'
 
 const theme = createMuiTheme({
 
@@ -35,10 +35,10 @@ function App ({ store }) {
           <Switch>
             <Route path="/" exact={true} component={Home} />
             <Route path="/goal/add" component={GoalAdd} />
-            <Route path="/goal/:id" component={Goal} />
+            <Route path="/goal/:id" exact={true} component={Goal} />
             <Route path="/goal/edit/:id" component={GoalEdit} />
             <Route path="/action/add/:id" component={ActionAdd} />
-            <Route path="/action/list/:id" component={ActionListPage} />
+            <Route path="/action/list/:id" component={Action} />
           </Switch>
         </ThemeProvider>
       </Provider>

@@ -7,6 +7,7 @@ import { store } from './store'
 import { initDB } from './dao/db'
 import * as unitDao from './dao/unit'
 import * as goalDao from './dao/goal'
+import * as actionDao from './dao/action'
 
 async function init () {
 
@@ -24,10 +25,21 @@ async function init () {
   store.dispatch.initState.setState(true)
 
   console.log(`init in ${Date.now() - startTime}ms.`)
+
+  // const list = await actionDao.query({
+  //   goalId: 1,
+  //   start: 0,
+  //   limit: 20
+  // })
+
+  // console.log('list-->', list)
+
+  // TODO to remote, for test
+  ReactDOM.render(<App store={store} /> , document.getElementById('app'))
 }
 
 init()
 
 window.store = store
 
-ReactDOM.render(<App store={store} /> , document.getElementById('app'))
+// ReactDOM.render(<App store={store} /> , document.getElementById('app'))

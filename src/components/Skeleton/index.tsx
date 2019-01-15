@@ -31,7 +31,7 @@ export default function Skeleton ({ count = 5 }) {
   const classes = useStyles()
 
   // tslint:disable-next-line:jsx-key
-  const lines = Array(count).fill('').map((index) => <div className={classes.skeletonLine} />)
+  const lines = Array(count).fill('').map((_, index) => <div key={index} className={classes.skeletonLine} />)
 
   return (
     <Fragment>

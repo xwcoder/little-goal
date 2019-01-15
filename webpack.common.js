@@ -24,5 +24,22 @@ module.exports = {
         use: 'babel-loader'
       }
     ]
+  },
+
+  optimization: {
+    // minimize: false,
+    runtimeChunk: {
+      name: 'manifest'
+    },
+    namedChunks: true,
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          chunks: 'all',
+          test: /[\\/]node_modules[\\/]/
+        }
+      }
+    }
   }
 }

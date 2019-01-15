@@ -16,6 +16,9 @@ module.exports = merge(commonConfig, {
     disableHostCheck: true,
     index: 'index.html',
     // publicPath: '/bundle/'
+    watchOptions: {
+      aggregateTimeout: 1000
+    }
   },
 
   plugins: [
