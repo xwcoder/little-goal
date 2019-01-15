@@ -25,7 +25,8 @@ export async function initDB () {
     actionStore.createIndex('time', 'time')
     actionStore.createIndex('goalId-time', ['goalId', 'time'])
 
-    idb.createObjectStore('unit', { autoIncrement: true, keyPath: 'id' })
+    const unitStore = idb.createObjectStore('unit', { autoIncrement: true, keyPath: 'id' })
+    unitStore.createIndex('text', 'text', { unique: true })
   })
 
   if (oldVersion === 0) {

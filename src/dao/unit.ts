@@ -6,3 +6,17 @@ export async function getAll () {
 
   return store.getAll()
 }
+
+export async function del (id) {
+  const db = await open()
+  const store = db.transaction('unit', 'readwrite').objectStore('unit')
+
+  return store.delete(id)
+}
+
+export async function add (unit) {
+  const db = await open()
+  const store = db.transaction('unit', 'readwrite').objectStore('unit')
+
+  return store.add(unit)
+}

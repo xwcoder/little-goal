@@ -1,27 +1,45 @@
 import * as React from 'react'
-import { useState } from 'react'
+import { Fragment, useState } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
   FormControl,
   InputLabel,
   TextField,
   Select,
   MenuItem,
-  Button
+  Button,
+  Grid
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
-import { UNIT_LIST } from '../../constants'
+import UnitFormDialog from '../UnitFormDialog'
 import { formatTime, noop } from '../../util'
 
 const useStyles = makeStyles((theme) => ({
 
   selectControl: {
-    minWidth: 120
+    minWidth: 120,
+    marginBottom: 0
   },
 
   submitButton: {
     marginTop: theme.spacing.unit * 4
+  },
+
+  unitBtn: {
+    padding: 4,
+    marginLeft: 4,
+    minWidth: 0,
+    minHeight: 0,
+    fontSize: 10,
+    fontWeight: 'normal',
+    color: theme.palette.primary.light,
+    textDecoration: 'none'
+  },
+
+  addBtn: {
+    marginLeft: theme.spacing.unit * 1.5
   }
 }))
 
@@ -37,8 +55,7 @@ function GoalForm (props) {
     update
   } = props
 
-  let { unitList } = props
-  unitList = unitList && unitList.length ? unitList : UNIT_LIST // TODO  to be removed, for test
+  const { unitList } = props
 
   const isEdit = typeof id !== 'undefined'
   let goal: any = {}
@@ -86,71 +103,113 @@ function GoalForm (props) {
     onSuccess()
   }
 
+  const [open, setOpen] = useState(false)
+
+  function handleUnitAddBtnClick () {
+    setOpen(true)
+  }
+
+  function handleDialogClose () {
+    setOpen(false)
+  }
+
+  function onUnitCreateSuccess (unitId) {
+    setOpen(false)
+    setState({
+      ...state,
+      unitId
+    })
+  }
+
   return (
-    <form onSubmit={handleSubmit}>
-      <TextField
-        label="标题"
-        placeholder="比如: 2019年读12本书"
-        value={state.title}
-        fullWidth={true}
-        required={true}
-        autoFocus={true}
-        margin="normal"
-        onChange={handleChange('title')}
-      />
-      <TextField
-        label="目标"
-        placeholder="数量 比如: 12"
-        value={state.amount}
-        fullWidth={true}
-        required={true}
-        margin="normal"
-        type="number"
-        onChange={handleChange('amount')}
-      />
-      <FormControl
-        required={true}
-        className={classes.selectControl}
-        margin="normal"
-      >
-        <InputLabel>计量单位</InputLabel>
-        <Select
-          value={state.unitId}
-          onChange={handleChange('unitId')}
+    <Fragment>
+      <form onSubmit={handleSubmit}>
+        <TextField
+          label="标题"
+          placeholder="比如: 2019年读12本书"
+          value={state.title}
+          fullWidth={true}
+          required={true}
+          autoFocus={true}
+          margin="normal"
+          onChange={handleChange('title')}
+        />
+        <TextField
+          label="目标"
+          placeholder="数量 比如: 12"
+          value={state.amount}
+          fullWidth={true}
+          required={true}
+          margin="normal"
+          type="number"
+          onChange={handleChange('amount')}
+        />
+        <Grid
+          container={true}
+          alignItems="flex-end"
         >
-          {unitList.map((unit) => <MenuItem key={unit.id} value={unit.id}>{unit.text}</MenuItem>)}
-        </Select>
-      </FormControl>
-      <div>
-        <TextField
-          label="开始日期"
-          type="date"
-          value={state.startTime}
-          required={true}
-          margin="normal"
-          onChange={handleChange('startTime')}
-        />
-      </div>
-      <div>
-        <TextField
-          label="结束日期"
-          type="date"
-          value={state.endTime}
-          required={true}
-          margin="normal"
-          onChange={handleChange('endTime')}
-        />
-      </div>
-      <Button
-        className={classes.submitButton}
-        type="submit"
-        color="primary"
-        variant="contained"
-        fullWidth={true}
-      >
-        done
-      </Button>
-    </form>
+          <FormControl
+            required={true}
+            className={classes.selectControl}
+            margin="normal"
+          >
+            <InputLabel>计量单位</InputLabel>
+            <Select
+              value={state.unitId}
+              onChange={handleChange('unitId')}
+            >
+              {unitList.map((unit) => <MenuItem key={unit.id} value={unit.id}>{unit.text}</MenuItem>)}
+            </Select>
+          </FormControl>
+          <Button
+            className={`${classes.unitBtn} ${classes.addBtn}`}
+            onClick={handleUnitAddBtnClick}
+          >
+            添加
+          </Button>
+          <Link
+            to="/unit/list"
+            className={classes.unitBtn}
+          >
+            管理
+          </Link>
+        </Grid>
+        <div>
+          <TextField
+            label="开始日期"
+            type="date"
+            value={state.startTime}
+            required={true}
+            margin="normal"
+            onChange={handleChange('startTime')}
+          />
+        </div>
+        <div>
+          <TextField
+            label="结束日期"
+            type="date"
+            value={state.endTime}
+            required={true}
+            margin="normal"
+            onChange={handleChange('endTime')}
+          />
+        </div>
+        <Button
+          className={classes.submitButton}
+          type="submit"
+          color="primary"
+          variant="contained"
+          fullWidth={true}
+        >
+          done
+        </Button>
+      </form>
+      <UnitFormDialog
+        open={open}
+        handleClose={handleDialogClose}
+        onSuccess={onUnitCreateSuccess}
+      />
+    </Fragment>
   )
 }
 

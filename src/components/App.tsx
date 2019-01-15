@@ -10,6 +10,7 @@ import {
 import { CssBaseline } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
+// import { blue } from '@material-ui/core/colors'
 
 import Home from './pages/Home'
 import GoalAdd from './pages/GoalAdd'
@@ -17,12 +18,17 @@ import Goal from './pages/Goal'
 import GoalEdit from './pages/GoalEdit'
 import ActionAdd from './pages/ActionAdd'
 import Action from './pages/Action'
+import Unit from './pages/Unit'
 
 const theme = createMuiTheme({
 
   typography: {
     useNextVariants: true
   }
+
+  // palette: {
+  //   primary: blue
+  // }
 })
 
 function App ({ store }) {

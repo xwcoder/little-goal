@@ -51,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function ActionListPage ({ goalList, match, del }) {
+function UnitPage ({ goalList, match, del }) {
+  // TODO to be continue
 
   const goalId = parseInt(match.params.id, 10)
   const goal = goalList.find((item) => item.id === goalId)
@@ -238,4 +239,4 @@ export default connect(
     }
   })
 
-)(ActionListPage)
+)(UnitPage)

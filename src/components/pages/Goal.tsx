@@ -50,9 +50,7 @@ function Goal ({ goalList, unitList, history, match, del }) {
 
   const classes = useStyles()
 
-  let unit = unitList.find((item) => item.id === goal.unitId)
-
-  unit = unit || { id: goal.unitId, text: '本' } // TODO for test
+  const unit = unitList.find((item) => item.id === goal.unitId)
 
   const {
     title,
