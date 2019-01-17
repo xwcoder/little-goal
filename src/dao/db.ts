@@ -1,7 +1,5 @@
 import coladb from 'coladb'
-import { UNIT_LIST } from '../constants'
-
-const unitList = UNIT_LIST.map((unit) => ({text: unit.text}))
+import { INIT_UNIT_LIST } from '../constants'
 
 const dbname = 'little-goal'
 const version = 1
@@ -32,7 +30,7 @@ export async function initDB () {
   if (oldVersion === 0) {
     const unitStore = db.transaction('unit', 'readwrite').objectStore('unit')
 
-    return Promise.all(unitList.map((unit) => unitStore.add(unit)))
+    return Promise.all(INIT_UNIT_LIST.map((unit) => unitStore.add(unit)))
   }
 }
 

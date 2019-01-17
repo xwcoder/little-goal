@@ -9,9 +9,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-export default function ContentContainer ({ children }) {
+export default function ContentContainer ({ className = '', children }) {
 
   const classes = useStyles()
 
-  return <div className={classes.container}>{children}</div>
+  return <div className={`${classes.container} ${className}`}>{children}</div>
 }

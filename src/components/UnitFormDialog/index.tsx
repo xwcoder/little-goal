@@ -13,7 +13,14 @@ import {
 
 import { noop } from '../../util'
 
-function UnitFormDialog (props) {
+interface PropsType {
+  open: boolean
+  handleClose: () => void
+  onSuccess?: (id: number) => void,
+  create: (text: string) => Promise<number>
+}
+
+function UnitFormDialog (props: PropsType) {
 
   const {
     open,
@@ -32,10 +39,14 @@ function UnitFormDialog (props) {
     setText(e.target.value)
   }
 
-  async function handleAdd () {
+  async function handleSubmit (e) {
+
+    e.preventDefault()
 
     try {
       const id = await create(text)
+      handleClose()
+      setText('')
       onSuccess(id)
     } catch (e) {
       if (e && e.name === 'ConstraintError') {
@@ -48,39 +59,43 @@ function UnitFormDialog (props) {
     <Dialog
       open={open}
     >
-      <DialogTitle>添加计量单位</DialogTitle>
-      <DialogContent>
-        <DialogContentText
-          color="error"
-          variant="body2"
-        >
-          {errorMsg}
-        </DialogContentText>
-        <TextField
-          autoFocus={true}
-          required={true}
-          value={text}
-          placeholder="例如，km"
-          margin="dense"
-          label="计量单位"
-          fullWidth={true}
-          onChange={handleChange}
-        />
-      </DialogContent>
-      <DialogActions>
-        <Button
-          color="primary"
-          onClick={handleClose}
-        >
-          关闭
-        </Button>
-        <Button
-          color="primary"
-          onClick={handleAdd}
-        >
-          添加
-        </Button>
-      </DialogActions>
+      <form
+        onSubmit={handleSubmit}
+      >
+        <DialogTitle>添加计量单位</DialogTitle>
+        <DialogContent>
+          <DialogContentText
+            color="error"
+            variant="body2"
+          >
+            {errorMsg}
+          </DialogContentText>
+          <TextField
+            autoFocus={true}
+            required={true}
+            value={text}
+            placeholder="例如，km"
+            margin="dense"
+            label="计量单位"
+            fullWidth={true}
+            onChange={handleChange}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            color="primary"
+            onClick={handleClose}
+          >
+            关闭
+          </Button>
+          <Button
+            type="submit"
+            color="primary"
+          >
+            添加
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   )
 }

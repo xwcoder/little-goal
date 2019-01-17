@@ -10,7 +10,7 @@ import {
 import { CssBaseline } from '@material-ui/core'
 import { createMuiTheme } from '@material-ui/core/styles'
 import { ThemeProvider } from '@material-ui/styles'
-// import { blue } from '@material-ui/core/colors'
+import { blue } from '@material-ui/core/colors'
 
 import Home from './pages/Home'
 import GoalAdd from './pages/GoalAdd'
@@ -24,11 +24,11 @@ const theme = createMuiTheme({
 
   typography: {
     useNextVariants: true
-  }
+  },
 
-  // palette: {
-  //   primary: blue
-  // }
+  palette: {
+    primary: blue
+  }
 })
 
 function App ({ store }) {
@@ -45,6 +45,7 @@ function App ({ store }) {
             <Route path="/goal/edit/:id" component={GoalEdit} />
             <Route path="/action/add/:id" component={ActionAdd} />
             <Route path="/action/list/:id" component={Action} />
+            <Route path="/unit/list" component={Unit} />
           </Switch>
         </ThemeProvider>
       </Provider>

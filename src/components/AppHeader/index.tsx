@@ -12,10 +12,10 @@ import { makeStyles } from '@material-ui/styles'
 
 const useStyles = makeStyles({
   grow: {
-    flexGrow: 1
-  },
-  link: {
-    color: 'inherit'
+    flexGrow: 1,
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis'
   }
 })
 

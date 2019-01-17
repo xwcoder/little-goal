@@ -29,8 +29,7 @@ export async function query ({
   start = 0,
   limit = Infinity,
   fromTime = new Date('1970-01-10').getTime(),
-  endTime = new Date().getTime(),
-  direction = 'prev'
+  endTime = new Date().getTime()
 }) {
 
   let amount = 1
@@ -38,7 +37,9 @@ export async function query ({
 
   const db = await open()
   const index = db.transaction('action', 'readonly').objectStore('action').index('goalId-time')
-  let cursor: any = await index.openCursor(IDBKeyRange.bound([goalId, fromTime], [goalId, endTime]), direction)
+
+  // tslint:disable-next-line:no-invalid-await
+  let cursor: any = await index.openCursor(IDBKeyRange.bound([goalId, fromTime], [goalId, endTime]), 'prev')
 
   if (cursor) {
 
@@ -65,6 +66,8 @@ export async function count (goalId?) {
   }
 
   const index = store.index('goalId')
+
+  // tslint:disable-next-line:no-invalid-await
   const list: any = await index.getAllKeys(IDBKeyRange.only(goalId))
   return list ? list.length : 0
 }

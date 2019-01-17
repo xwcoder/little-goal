@@ -24,6 +24,7 @@ export async function del (id) {
 
   goalStore.delete(id)
 
+  // tslint:disable-next-line:no-invalid-await
   let cursor: any = await actionIndex.openCursor(id)
 
   while (cursor) {
@@ -36,6 +37,8 @@ export async function update (goal) {
 
   const db = await open()
   const store = db.transaction('goal', 'readwrite').objectStore('goal')
+
+  // tslint:disable-next-line:no-invalid-await
   const cursor: any = await store.openCursor(goal.id)
 
   if (cursor) {

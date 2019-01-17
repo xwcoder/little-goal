@@ -6,15 +6,15 @@ import { Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 
 import AppHeader from '../AppHeader'
+import ContentContainer from '../ContentContainer'
 import GoalList from '../GoalList'
-import Skeleton from '../Skeleton'
-import AddGoalButton from '../AddGoalButton'
+import AppBarIconLink from '../AppBarIconLink'
 
 const useStyles = makeStyles((theme) => {
 
   return {
     contentContainer: {
-      padding: theme.spacing.unit * 3
+      paddingTop: theme.spacing.unit * 3
     },
     emptyContainer: {
       marginTop: theme.spacing.unit * 5,
@@ -34,7 +34,7 @@ function Home ({ initState, goalCount }) {
   let content
 
   if (!initState ) {
-    content = <Skeleton />
+    content = null
   } else if (goalCount === 0) {
     content = (
       <div className={classes.emptyContainer}>
@@ -55,11 +55,13 @@ function Home ({ initState, goalCount }) {
   return (
     <Fragment>
       <AppHeader title="小目标">
-        <AddGoalButton />
+        {initState && <AppBarIconLink to="/goal/add" variant="add" />}
       </AppHeader>
-      <div className={classes.contentContainer}>
+      <ContentContainer
+        className={classes.contentContainer}
+      >
         {content}
-      </div>
+      </ContentContainer>
     </Fragment>
   )
 }

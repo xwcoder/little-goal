@@ -14,28 +14,28 @@ import {
   DialogTitle,
   DialogContentText
 } from '@material-ui/core'
-import { Delete as DeleteIcon } from '@material-ui/icons'
 
 import ContentContainer from '../ContentContainer'
 import AppHeader from '../AppHeader'
-import EditoGoalButton from '../EditGoalButton'
+import AppBarIconLink from '../AppBarIconLink'
+import AppBarIcon from '../AppBarIcon'
 
 import { formatTime } from './../../util'
 
 const useStyles = makeStyles((theme) => ({
   actionButton: {
-    marginTop: theme.spacing.unit * 4
+    marginTop: theme.spacing.unit * 3
   },
   link: {
     display: 'block',
     textDecoration: 'none',
-    color: 'inhiret'
+    color: 'inherit'
   },
   allActionLink: {
     display: 'inline-block',
     marginTop: theme.spacing.unit,
     textDecoration: 'none',
-    color: 'inhiret'
+    color: 'inherit'
   }
 }))
 
@@ -64,7 +64,7 @@ function Goal ({ goalList, unitList, history, match, del }) {
     disabled: true
   }
 
-  const completeView = `${completeAmount} (${(completeAmount / amount * 100).toFixed(2) }%)`
+  const rate = `${(completeAmount / amount * 100).toFixed(2) }%`
   const startTimeView = formatTime(startTime, 'yyyy-MM-dd')
   const endTimeView = formatTime(endTime, 'yyyy-MM-dd')
 
@@ -89,9 +89,15 @@ function Goal ({ goalList, unitList, history, match, del }) {
         title={goal.title}
         backButton={true}
       >
-        <EditoGoalButton id={id} />
-        <IconButton color="inherit">
-          <DeleteIcon onClick={handleOpen} />
+        <AppBarIconLink
+          to={`/goal/edit/${id}`}
+          variant="edit"
+        />
+        <IconButton
+          color="inherit"
+          onClick={handleOpen}
+        >
+          <AppBarIcon variant="del" />
         </IconButton>
       </AppHeader>
       <ContentContainer>
@@ -111,7 +117,14 @@ function Goal ({ goalList, unitList, history, match, del }) {
         />
         <TextField
           label="已完成"
-          value={completeView}
+          value={completeAmount}
+          fullWidth={true}
+          margin="normal"
+          inputProps={inputProps}
+        />
+        <TextField
+          label="进度"
+          value={rate}
           fullWidth={true}
           margin="normal"
           inputProps={inputProps}

@@ -1,37 +1,71 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-
 import {
   List,
-  ListItem,
-  ListItemText
+  ListItem
 } from '@material-ui/core'
-
 import { makeStyles } from '@material-ui/styles'
+import { Add as AddIcon } from '@material-ui/icons'
 
-const useStyls = makeStyles((theme) => ({
-  listItem: {
-    border: '1px solid',
-    borderColor: theme.palette.primary.light,
-    paddingTop: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    marginBottom: theme.spacing.unit * 1.5,
-    borderRadius: 5,
-    backgroundColor: theme.palette.primary.light
+import Progress from '../Progress'
+
+const useStyles = makeStyles((theme) => {
+
+  return {
+
+    listItem: {
+      border: '1px solid',
+      borderColor: theme.palette.primary.light,
+      paddingTop: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit,
+      marginBottom: theme.spacing.unit * 1.5,
+      borderRadius: theme.shape.borderRadius,
+      overflow: 'hidden'
+    },
+
+    link: {
+      flex: 1,
+      marginRight: theme.spacing.unit * 1.5,
+      color: theme.palette.primary.dark,
+      textDecoration: 'none',
+      fontSize: '0.875rem'
+    },
+
+    actionAddLink: {
+      color: theme.palette.primary.dark,
+      fontSize: '0.875rem',
+      lineHeight: '0.875rem'
+    },
+
+    icon: {
+      fontSize: '1.125rem'
+    }
   }
-}))
+})
 
 function GoalList ({ goalList }) {
 
-  const classes = useStyls()
+  const classes = useStyles()
 
   const items = goalList.map((goal) => (
     <ListItem key={goal.id} className={classes.listItem}>
-      <Link to={`/goal/${goal.id}`}>
-        <ListItemText>
-          {goal.title}
-        </ListItemText>
+      <Progress
+        value={(goal.completeAmount / goal.amount)}
+      />
+      <Link
+        className={classes.link}
+        to={`/goal/${goal.id}`}
+      >
+        {goal.title}
+      </Link>
+      <Link
+        className={classes.actionAddLink}
+        to={`/action/add/${goal.id}`}
+      >
+        <AddIcon
+          className={classes.icon}
+        />
       </Link>
     </ListItem>
   ))

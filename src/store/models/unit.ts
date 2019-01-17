@@ -10,7 +10,7 @@ export const unit = {
 
       const list = Array.isArray(units) ? units : [units]
 
-      return [...state, ...list]
+      return [...list, ...state]
     },
 
     remove (state, id) {

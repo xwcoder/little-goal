@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   submitButton: {
-    marginTop: theme.spacing.unit * 4
+    marginTop: theme.spacing.unit * 3
   },
 
   unitBtn: {
@@ -62,10 +62,10 @@ function GoalForm (props) {
 
   if (isEdit) {
     goal = goalList.find((item) => item.id === id)
+  }
 
-    if (!goal) {
-      return null
-    }
+  if (!goal || !unitList.length) {
+    return null
   }
 
   const [state, setState] = useState({
@@ -114,7 +114,7 @@ function GoalForm (props) {
   }
 
   function onUnitCreateSuccess (unitId) {
-    setOpen(false)
+    // setOpen(false)
     setState({
       ...state,
       unitId
@@ -126,7 +126,7 @@ function GoalForm (props) {
       <form onSubmit={handleSubmit}>
         <TextField
           label="标题"
-          placeholder="比如: 2019年读12本书"
+          placeholder={`比如: ${new Date().getFullYear()}年读12本书`}
           value={state.title}
           fullWidth={true}
           required={true}
