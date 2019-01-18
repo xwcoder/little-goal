@@ -14,9 +14,10 @@ export async function del (id) {
   return store.delete(id)
 }
 
-export async function add (unit) {
+export async function add (data) {
+
   const db = await open()
   const store = db.transaction('unit', 'readwrite').objectStore('unit')
 
-  return store.add(unit)
+  return store.add(data)
 }

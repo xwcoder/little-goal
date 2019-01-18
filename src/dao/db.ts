@@ -30,7 +30,7 @@ export async function initDB () {
   if (oldVersion === 0) {
     const unitStore = db.transaction('unit', 'readwrite').objectStore('unit')
 
-    return Promise.all(INIT_UNIT_LIST.map((unit) => unitStore.add(unit)))
+    return Promise.all(INIT_UNIT_LIST.map((text) => unitStore.add({ text })))
   }
 }
 

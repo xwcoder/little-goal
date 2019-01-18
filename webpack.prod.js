@@ -6,6 +6,11 @@ module.exports = merge(commonConfig, {
 
   mode: 'production',
 
+  output: {
+    filename: '[name].[chunkhash:8].js',
+    chunkFilename: '[id]_[chunkhash:8].js'
+  },
+
   plugins: [
     new webpack.HashedModuleIdsPlugin()
   ]

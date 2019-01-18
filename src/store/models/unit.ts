@@ -28,10 +28,9 @@ export const unit = {
 
   effects: (dispatch) => ({
 
-    async create (data) {
-      const id = await unitDao.add(data)
-      data.id = id
-      dispatch.unit.add(data)
+    async create (text) {
+      const id = await unitDao.add({ text })
+      dispatch.unit.add({ text, id })
       return id
     },
 

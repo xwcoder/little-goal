@@ -1,4 +1,6 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const AssetsPlugin = require('assets-webpack-plugin')
 
 module.exports = {
 
@@ -7,12 +9,10 @@ module.exports = {
   },
 
   entry: {
-    index: './src/index',
-    // sw: './src/sw'
+    index: './src/index'
   },
 
   output: {
-    filename: '[name].js',
     path: path.resolve(__dirname, 'dist')
   },
 
@@ -26,8 +26,21 @@ module.exports = {
     ]
   },
 
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.ejs'
+    }),
+    new AssetsPlugin({
+      filename: './dist/assets.js',
+      processOutput: (assets) => {
+        const list = Object.values(assets).map((item) => item.js).filter((item) => !!item)
+        return `var assets = ${JSON.stringify(list)}`
+      }
+    })
+  ],
+
   optimization: {
-    // minimize: false,
+    minimize: process.env.NODE_ENV === 'development' ? false : true,
     runtimeChunk: {
       name: 'manifest'
     },

@@ -33,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 0,
     minHeight: 0,
     fontSize: 10,
+    lineHeight: 1.25,
     fontWeight: 'normal',
     color: theme.palette.primary.light,
     textDecoration: 'none'

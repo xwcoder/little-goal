@@ -48,27 +48,37 @@ function GoalList ({ goalList }) {
 
   const classes = useStyles()
 
-  const items = goalList.map((goal) => (
-    <ListItem key={goal.id} className={classes.listItem}>
-      <Progress
-        value={(goal.completeAmount / goal.amount)}
-      />
-      <Link
-        className={classes.link}
-        to={`/goal/${goal.id}`}
-      >
-        {goal.title}
-      </Link>
-      <Link
-        className={classes.actionAddLink}
-        to={`/action/add/${goal.id}`}
-      >
-        <AddIcon
-          className={classes.icon}
+  const items = goalList.map((goal) => {
+
+    const {
+      id,
+      title,
+      completeAmount = 0,
+      amount
+    } = goal
+
+    return (
+      <ListItem key={id} className={classes.listItem}>
+        <Progress
+          value={(completeAmount / amount)}
         />
-      </Link>
-    </ListItem>
-  ))
+        <Link
+          className={classes.link}
+          to={`/goal/${id}`}
+        >
+          {title}
+        </Link>
+        <Link
+          className={classes.actionAddLink}
+          to={`/action/add/${id}`}
+        >
+          <AddIcon
+            className={classes.icon}
+          />
+        </Link>
+      </ListItem>
+    )
+  })
 
   return (
     <List>

@@ -1,4 +1,3 @@
-import './boots'
 import * as React from 'react'
 import { hot } from 'react-hot-loader/root'
 import { Provider } from 'react-redux'
@@ -46,6 +45,7 @@ function App ({ store }) {
             <Route path="/action/add/:id" component={ActionAdd} />
             <Route path="/action/list/:id" component={Action} />
             <Route path="/unit/list" component={Unit} />
+            <Route component={Home} />
           </Switch>
         </ThemeProvider>
       </Provider>

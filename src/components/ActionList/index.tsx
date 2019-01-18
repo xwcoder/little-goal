@@ -77,7 +77,8 @@ function ActionList ({ goalId, del }) {
 
     setState({
       ...state,
-      list: nextList
+      list: nextList,
+      count: state.count - 1
     })
   }
 

@@ -104,7 +104,7 @@ export default connect(
   null,
   (dispatch: any) => ({
     create (text) {
-      return dispatch.unit.create({ text })
+      return dispatch.unit.create(text)
     }
   })
 )(UnitFormDialog)
