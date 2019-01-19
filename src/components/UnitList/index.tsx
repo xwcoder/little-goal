@@ -65,6 +65,15 @@ function UnitList (props) {
       return
     }
 
+    if (unitList.length <= 1) {
+      setSnackbarState({
+        ...snackbarState,
+        open: true,
+        message: '这是最后一个计量单位, 不能删除.'
+      })
+      return
+    }
+
     del(id)
   }
 
