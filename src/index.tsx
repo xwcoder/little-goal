@@ -30,14 +30,14 @@ init()
 
 ReactDOM.render(<App store={store} /> , document.getElementById('app'))
 
-// if ('serviceWorker' in navigator) {
-//   navigator.serviceWorker.register('./sw.js')
-//   .then((reg) => {
-//     // tslint:disable-next-line:no-console
-//     console.log('registion sw.js success.')
-//   })
-//   .catch((err) => {
-//     // tslint:disable-next-line:no-console
-//     console.log('registion failed ', err)
-//   })
-// }
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js')
+  .then((reg) => {
+    // tslint:disable-next-line:no-console
+    console.log('registion sw.js success.')
+  })
+  .catch((err) => {
+    // tslint:disable-next-line:no-console
+    console.log('registion failed ', err)
+  })
+}
