@@ -20,7 +20,7 @@ import AppHeader from '../AppHeader'
 import AppBarIconLink from '../AppBarIconLink'
 import AppBarIcon from '../AppBarIcon'
 
-import { formatTime } from './../../util'
+import { formatTime, pathTag } from './../../util'
 
 const useStyles = makeStyles((theme) => ({
   actionButton: {
@@ -90,7 +90,7 @@ function Goal ({ goalList, unitList, history, match, del }) {
         backButton={true}
       >
         <AppBarIconLink
-          to={`/goal/edit/${id}`}
+          to={pathTag`/goal/edit/${id}`}
           variant="edit"
         />
         <IconButton
@@ -154,7 +154,7 @@ function Goal ({ goalList, unitList, history, match, del }) {
           />
         </div>
         <Link
-          to={`/action/add/${id}`}
+          to={pathTag`/action/add/${id}`}
           className={classes.link}
         >
           <Button
@@ -169,7 +169,7 @@ function Goal ({ goalList, unitList, history, match, del }) {
         {
           completeAmount > 0 &&
           <Link
-            to={`/action/list/${id}`}
+            to={pathTag`/action/list/${id}`}
             className={classes.allActionLink}
           >
             <Button

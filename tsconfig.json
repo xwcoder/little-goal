@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./lib",
+    "outDir": "./docs",
     "module": "es6",
     "moduleResolution": "Node",
     "target": "es2017",

@@ -8,7 +8,7 @@ module.exports = merge(commonConfig, {
 
   output: {
     filename: '[name].[chunkhash:8].js',
-    chunkFilename: '[id]_[chunkhash:8].js'
+    chunkFilename: '[id].[chunkhash:8].js'
   },
 
   plugins: [

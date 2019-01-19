@@ -10,6 +10,8 @@ import ContentContainer from '../ContentContainer'
 import GoalList from '../GoalList'
 import AppBarIconLink from '../AppBarIconLink'
 
+import { pathTag } from '../../util'
+
 const useStyles = makeStyles((theme) => {
 
   return {
@@ -38,7 +40,7 @@ function Home ({ initState, goalCount }) {
   } else if (goalCount === 0) {
     content = (
       <div className={classes.emptyContainer}>
-        <Link to="/goal/add" className={classes.addLink}>
+        <Link to={pathTag`/goal/add`} className={classes.addLink}>
           <Button
             variant="outlined"
             color="primary"
@@ -55,7 +57,7 @@ function Home ({ initState, goalCount }) {
   return (
     <Fragment>
       <AppHeader title="小目标">
-        {initState && <AppBarIconLink to="/goal/add" variant="add" />}
+        {initState && <AppBarIconLink to={pathTag`/goal/add`} variant="add" />}
       </AppHeader>
       <ContentContainer
         className={classes.contentContainer}

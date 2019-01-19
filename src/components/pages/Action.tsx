@@ -7,6 +7,8 @@ import AppHeader from '../AppHeader'
 import AppBarIconLink from '../AppBarIconLink'
 import ActionList from '../ActionList'
 
+import { pathTag } from '../../util'
+
 function Action ({ goalList, match }) {
 
   const goalId = parseInt(match.params.id, 10)
@@ -25,7 +27,7 @@ function Action ({ goalList, match }) {
         backButton={true}
       >
         <AppBarIconLink
-          to={`/action/add/${goalId}`}
+          to={pathTag`/action/add/${goalId}`}
           variant="add"
         />
       </AppHeader>

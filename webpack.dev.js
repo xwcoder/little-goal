@@ -19,10 +19,10 @@ module.exports = merge(commonConfig, {
     historyApiFallback: true,
     hot: true,
     inline: true,
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'docs'),
     disableHostCheck: true,
     index: 'index.html',
-    // publicPath: '/',
+    // publicPath: '/little-goal/',
     watchOptions: {
       aggregateTimeout: 1000
     }

@@ -19,6 +19,8 @@ import ActionAdd from './pages/ActionAdd'
 import Action from './pages/Action'
 import Unit from './pages/Unit'
 
+import { pathTag } from '../util'
+
 const theme = createMuiTheme({
 
   typography: {
@@ -38,13 +40,13 @@ function App ({ store }) {
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <Switch>
-            <Route path="/" exact={true} component={Home} />
-            <Route path="/goal/add" component={GoalAdd} />
-            <Route path="/goal/:id" exact={true} component={Goal} />
-            <Route path="/goal/edit/:id" component={GoalEdit} />
-            <Route path="/action/add/:id" component={ActionAdd} />
-            <Route path="/action/list/:id" component={Action} />
-            <Route path="/unit/list" component={Unit} />
+            <Route path={pathTag`/`} exact={true} component={Home} />
+            <Route path={pathTag`/goal/add`} component={GoalAdd} />
+            <Route path={pathTag`/goal/:id`} exact={true} component={Goal} />
+            <Route path={pathTag`/goal/edit/:id`} component={GoalEdit} />
+            <Route path={pathTag`/action/add/:id`} component={ActionAdd} />
+            <Route path={pathTag`/action/list/:id`} component={Action} />
+            <Route path={pathTag`/unit/list`} component={Unit} />
             <Route component={Home} />
           </Switch>
         </ThemeProvider>

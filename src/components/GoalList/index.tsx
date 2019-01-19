@@ -10,6 +10,8 @@ import { Add as AddIcon } from '@material-ui/icons'
 
 import Progress from '../Progress'
 
+import { pathTag } from '../../util'
+
 const useStyles = makeStyles((theme) => {
 
   return {
@@ -64,13 +66,13 @@ function GoalList ({ goalList }) {
         />
         <Link
           className={classes.link}
-          to={`/goal/${id}`}
+          to={pathTag`/goal/${id}`}
         >
           {title}
         </Link>
         <Link
           className={classes.actionAddLink}
-          to={`/action/add/${id}`}
+          to={pathTag`/action/add/${id}`}
         >
           <AddIcon
             className={classes.icon}

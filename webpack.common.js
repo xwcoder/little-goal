@@ -13,7 +13,7 @@ module.exports = {
   },
 
   output: {
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'docs')
   },
 
   module: {
@@ -31,7 +31,7 @@ module.exports = {
       template: './index.ejs'
     }),
     new AssetsPlugin({
-      filename: './dist/assets.js',
+      filename: './docs/assets.js',
       processOutput: (assets) => {
         const list = Object.values(assets).map((item) => item.js).filter((item) => !!item)
         return `var assets = ${JSON.stringify(list)}`

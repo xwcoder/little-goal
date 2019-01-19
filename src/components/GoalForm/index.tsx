@@ -14,7 +14,11 @@ import {
 import { makeStyles } from '@material-ui/styles'
 
 import UnitFormDialog from '../UnitFormDialog'
-import { formatTime, noop } from '../../util'
+import {
+  formatTime,
+  noop,
+  pathTag
+} from '../../util'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -33,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 0,
     minHeight: 0,
     fontSize: 10,
-    lineHeight: 1.25,
+    lineHeight: 1,
     fontWeight: 'normal',
     color: theme.palette.primary.light,
     textDecoration: 'none'
@@ -169,7 +173,7 @@ function GoalForm (props) {
             添加
           </Button>
           <Link
-            to="/unit/list"
+            to={pathTag`/unit/list`}
             className={classes.unitBtn}
           >
             管理
