@@ -30,14 +30,13 @@ const useStyles = makeStyles((theme) => {
       flex: 1,
       marginRight: theme.spacing.unit * 1.5,
       color: theme.palette.primary.dark,
-      textDecoration: 'none',
-      fontSize: '0.875rem'
+      textDecoration: 'none'
     },
 
     actionAddLink: {
       color: theme.palette.primary.dark,
-      fontSize: '0.875rem',
-      lineHeight: '0.875rem'
+      fontSize: '1rem',
+      lineHeight: '1rem'
     },
 
     icon: {
