@@ -16,8 +16,13 @@ export async function del (id) {
 
 export async function add (data) {
 
+  const saveData = {
+    ...data,
+    createTime: Date.now()
+  }
+
   const db = await open()
   const store = db.transaction('unit', 'readwrite').objectStore('unit')
 
-  return store.add(data)
+  return store.add(saveData)
 }

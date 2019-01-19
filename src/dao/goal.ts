@@ -12,6 +12,8 @@ export async function add (goal) {
   const db = await open()
   const store = db.transaction('goal', 'readwrite').objectStore('goal')
 
+  goal.createTime = Date.now()
+
   return store.add(goal)
 }
 
@@ -40,6 +42,8 @@ export async function update (goal) {
 
   // tslint:disable-next-line:no-invalid-await
   const cursor: any = await store.openCursor(goal.id)
+
+  goal.updateTime = Date.now()
 
   if (cursor) {
     return cursor.update(goal)
