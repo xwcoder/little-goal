@@ -13,10 +13,9 @@ addEventListener('install', (e) => {
     }
     e.waitUntil(cacheAll());
 });
-async function getCache(e) {
-    const cache = await caches.open(CACHE_NAME);
-    return cache.match(e.request);
-}
-addEventListener('fetch', (e) => {
-    e.respondWith(getCache(e));
+addEventListener('fetch', (event) => {
+    event.respondWith(caches.match(event.request)
+        .then((response) => {
+        return response || fetch(event.request);
+    }));
 });
