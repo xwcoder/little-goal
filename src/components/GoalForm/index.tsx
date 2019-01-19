@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: 4,
     minWidth: 0,
     minHeight: 0,
-    fontSize: 10,
+    fontSize: 12,
     lineHeight: 1,
     fontWeight: 'normal',
     color: theme.palette.primary.light,
