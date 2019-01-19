@@ -5,7 +5,11 @@ const CACHE_NAME = `little-goal-offline-v${CACHE_VERSION}`
 const ASSETS_TO_CACHE = [
   ...(self as any).assets,
   './',
-  './index.html'
+  './index.html',
+  './manifest.json',
+  './imgs/favicon.png',
+  './imgs/icon-114.png',
+  './imgs/icon-192.png'
 ]
 
 addEventListener('install', (e: any) => {
