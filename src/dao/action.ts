@@ -29,7 +29,7 @@ export async function query ({
   start = 0,
   limit = Infinity,
   fromTime = new Date('1970-01-10').getTime(),
-  endTime
+  endTime = Date.now()
 }) {
 
   let amount = 1
@@ -38,10 +38,9 @@ export async function query ({
   const db = await open()
   const index = db.transaction('action', 'readonly').objectStore('action').index('goalId-time')
 
-  // it is'nt work when `endTime = Date.now()` in safari, so use `Infinity`
   // tslint:disable-next-line:no-invalid-await
   let cursor: any = await index.openCursor(
-    IDBKeyRange.bound([goalId, fromTime], [goalId, endTime || Infinity]),
+    IDBKeyRange.bound([goalId, fromTime], [goalId, endTime]),
     'prev'
   )
 

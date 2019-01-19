@@ -52,11 +52,22 @@ function ActionForm (props) {
   const handleSubmit = async (event) => {
 
     event.preventDefault()
+
+    const { time } = state
+
+    const [date, hours] = time.split('T')
+    const [hour, minute] = hours.split(':')
+
+    const day = new Date(date)
+    day.setHours(hour)
+    day.setMinutes(minute)
+
     const action = {
       goalId: goal.id,
       ...state,
       amount: parseInt(state.amount, 10),
-      time: new Date(state.time).getTime()
+      // time: new Date(state.time).getTime()
+      time: day.getTime()
     }
 
     await create(action)
