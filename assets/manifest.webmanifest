@@ -1,0 +1,21 @@
+{
+  "name": "little-goal Progressive Web App",
+  "short_name": "小目标",
+  "description": "little-goal Progressive Web App",
+  "icons": [
+    {
+      "src": "/little-goal/imgs/icon-114.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/little-goal/imgs/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/little-goal/",
+  "display": "fullscreen",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3"
+}

@@ -7,7 +7,7 @@
     "prebuild": "rm -rf ./docs",
     "build:app": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
     "build:sw": "tsc -p tsconfig.sw.json",
-    "build": "npm run build:app && npm run build:sw",
+    "build": "npm run build:app && npm run build:sw && cp -r assets/ docs/",
     "dev:app": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js",
     "dev:sw": "tsc -w -p tsconfig.sw.json",
     "lint": "tslint --project tsconfig.json",

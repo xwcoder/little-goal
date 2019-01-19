@@ -1,4 +1,4 @@
-importScripts('/assets.js')
+importScripts('assets.js')
 
 const CACHE_VERSION = 1
 const CACHE_NAME = `little-goal-offline-v${CACHE_VERSION}`

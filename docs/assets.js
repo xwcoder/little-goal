@@ -1,1 +1,1 @@
-var assets = ["manifest.7da14f58.js","index.943c1e51.js","vendor.362241c8.js"]
+var assets = ["manifest.7da14f58.js","index.fc801967.js","vendor.362241c8.js"]
