@@ -1,15 +1,15 @@
 {
   "name": "little-goal Progressive Web App",
-  "short_name": "小目标",
+  "short_name": "目标lite",
   "description": "little-goal Progressive Web App",
   "icons": [
     {
-      "src": "imgs/icon-114.png",
+      "src": "/little-goal/imgs/icon-114.png",
       "sizes": "32x32",
       "type": "image/png"
     },
     {
-      "src": "imgs/icon-512.png",
+      "src": "/little-goal/imgs/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
