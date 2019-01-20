@@ -1,5 +1,5 @@
 importScripts('assets.js');
-const CACHE_VERSION = 2;
+const CACHE_VERSION = 3;
 const CACHE_NAME = `little-goal-offline-v${CACHE_VERSION}`;
 const ASSETS_TO_CACHE = [
     ...self.assets,
