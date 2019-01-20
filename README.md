@@ -4,7 +4,7 @@ A project to demonstrate `PWA`, `IndexedDB`, `React Hooks`, and it is also a lit
 
 ## Introduction
 
-Tech stacks:
+Tech stacks:
 * Material-UI, CSS in JS.
 * IndexedDB, [coladb](https://github.com/xwcoder/coladb).
 * React: hooks, rematch, react-router.
