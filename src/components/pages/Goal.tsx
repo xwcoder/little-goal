@@ -12,7 +12,8 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  DialogContentText
+  DialogContentText,
+  Grid
 } from '@material-ui/core'
 
 import ContentContainer from '../ContentContainer'
@@ -33,9 +34,11 @@ const useStyles = makeStyles((theme) => ({
   },
   allActionLink: {
     display: 'inline-block',
-    marginTop: theme.spacing.unit,
+    marginBottom: theme.spacing.unit,
+    marginLeft: theme.spacing.unit * 2,
+    fontSize: 12,
     textDecoration: 'none',
-    color: 'inherit'
+    color: theme.palette.primary.light
   }
 }))
 
@@ -115,13 +118,26 @@ function Goal ({ goalList, unitList, history, match, del }) {
           margin="normal"
           inputProps={inputProps}
         />
-        <TextField
-          label="已完成"
-          value={completeAmount}
-          fullWidth={true}
-          margin="normal"
-          inputProps={inputProps}
-        />
+        <Grid
+          container={true}
+          alignItems="flex-end"
+        >
+          <TextField
+            label="已完成"
+            value={completeAmount}
+            margin="normal"
+            inputProps={inputProps}
+          />
+          {
+            completeAmount > 0 &&
+            <Link
+              to={pathTag`/action/list/${id}`}
+              className={classes.allActionLink}
+            >
+              全部完成项
+            </Link>
+          }
+        </Grid>
         <TextField
           label="进度"
           value={rate}
@@ -166,19 +182,6 @@ function Goal ({ goalList, unitList, history, match, del }) {
             向前一小步
           </Button>
         </Link>
-        {
-          completeAmount > 0 &&
-          <Link
-            to={pathTag`/action/list/${id}`}
-            className={classes.allActionLink}
-          >
-            <Button
-              color="primary"
-            >
-              全部完成项
-            </Button>
-          </Link>
-        }
       </ContentContainer>
       <Dialog
         open={open}

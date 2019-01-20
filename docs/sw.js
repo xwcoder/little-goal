@@ -1,5 +1,5 @@
 importScripts('assets.js');
-const CACHE_VERSION = 1;
+const CACHE_VERSION = 2;
 const CACHE_NAME = `little-goal-offline-v${CACHE_VERSION}`;
 const ASSETS_TO_CACHE = [
     ...self.assets,
@@ -13,7 +13,7 @@ const ASSETS_TO_CACHE = [
 addEventListener('install', (e) => {
     async function cacheAll() {
         const cache = await caches.open(CACHE_NAME);
-        await cache.addAll(ASSETS_TO_CACHE);
+        return cache.addAll(ASSETS_TO_CACHE);
     }
     e.waitUntil(cacheAll());
 });
@@ -22,4 +22,12 @@ addEventListener('fetch', (event) => {
         .then((response) => {
         return response || fetch(event.request);
     }));
+});
+addEventListener('activate', (event) => {
+    async function clear() {
+        const keys = await caches.keys();
+        const deleteKeys = keys.filter((key) => key !== CACHE_NAME);
+        return Promise.all(deleteKeys.map((key) => caches.delete(key)));
+    }
+    event.waitUntil(clear());
 });
