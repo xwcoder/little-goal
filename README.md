@@ -11,7 +11,7 @@ A project to demonstrate `PWA`, `IndexedDB`, `React Hooks`, and it is also a lit
 
 >There is no test code for time reasons.
 
->Target device is iOS 12.
+>Target device is iOS 12.
 
 Open with Safari, and click `share` -> `Add to home scree`.
 
