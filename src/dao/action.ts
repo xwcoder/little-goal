@@ -28,7 +28,7 @@ export async function query ({
   goalId,
   start = 0,
   limit = Infinity,
-  fromTime = new Date('1970-01-10').getTime(),
+  fromTime = new Date('1970-01-01').getTime(),
   endTime = Date.now()
 }) {
 
