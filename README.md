@@ -13,7 +13,7 @@ Tech stacks:
 
 >Target device is iOS 12.
 
-Open with Safari, and click `share` -> `Add to home scree`.
+Open with Safari, and click `share` -> `Add to Home screen`.
 
 [Online address](https://xwcoder.github.io/little-goal/).
 
